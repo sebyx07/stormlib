@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'stormlib/version'
-require 'stormlib/stormlib'
+require_relative 'stormlib/stormlib'
 
 module StormLib
   class Archive
