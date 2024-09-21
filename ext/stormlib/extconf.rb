@@ -11,7 +11,11 @@ unless File.directory?(STORMLIB_DIR)
   system "git clone https://github.com/ladislav-zezula/StormLib.git #{STORMLIB_DIR}"
 end
 
-raise "Cannot find StormLib directory in #{STORMLIB_DIR}" unless File.directory?(STORMLIB_DIR)
+if File.directory?(STORMLIB_DIR) && File.exist?(File.join(STORMLIB_DIR, 'src', 'StormLib.h'))
+  puts 'StormLib found!'
+else
+  raise "Cannot find StormLib directory in #{STORMLIB_DIR}"
+end
 
 Dir.chdir(STORMLIB_DIR) do
   # Configure CMake to use -fPIC
