@@ -16,7 +16,7 @@ jobs:
       - name: Cache APT packages
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: zlib1g-dev libbz2-dev build-essential
+          packages: zlib1g-dev libbz2-dev build-essential libstdc++-12-dev
           version: 1.0
 
       - name: Set up Ruby
