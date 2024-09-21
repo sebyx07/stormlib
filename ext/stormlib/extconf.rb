@@ -4,14 +4,16 @@
 
 require 'mkmf'
 
+puts "Checking for StormLib..."
 STORMLIB_DIR = File.expand_path('../StormLib', __FILE__)
 unless File.directory?(STORMLIB_DIR)
+  puts "Cloning StormLib..."
   system "git clone https://github.com/ladislav-zezula/StormLib.git #{STORMLIB_DIR}"
 end
 
 Dir.chdir(STORMLIB_DIR) do
   # Configure CMake to use -fPIC
-  system('cmake . -DCMAKE_POSITION_INDEPENDENT_CODE=ON')
+  system('cmake . -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_C_FLAGS="-Wno-old-style-definition"')
   system('make clean')  # Clean previous build
   system('make')
 end
