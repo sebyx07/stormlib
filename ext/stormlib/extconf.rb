@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: ext/stormlib/extconf.rb
 
 require 'mkmf'

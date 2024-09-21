@@ -17,6 +17,6 @@ task :clone_stormlib do
   end
 end
 
-task :compile => :clone_stormlib
+task compile: :clone_stormlib
 
 task default: :spec
