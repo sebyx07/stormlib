@@ -30,7 +30,7 @@ lib_name = File.basename(lib_file).sub(/^lib/, '').sub(/\.(a|so)$/, '')
 
 # Set up the extension
 $CFLAGS << " -I#{STORMLIB_DIR}/src -fPIC"
-$LDFLAGS << " -L#{lib_dir} -l#{lib_name}"
+$LDFLAGS << " -L#{lib_dir} -l#{lib_name} -lz -lbz2"
 
 # On some systems, you might need to adjust the library path
 $LDFLAGS << " -Wl,-rpath,#{lib_dir}"
@@ -39,5 +39,7 @@ $LDFLAGS << " -Wl,-rpath,#{lib_dir}"
 dir_config('stormlib', "#{STORMLIB_DIR}/src", lib_dir)
 
 have_library(lib_name) or raise "Unable to find #{lib_name} library"
+have_library('z') or raise "Unable to find zlib"
+have_library('bz2') or raise "Unable to find bzip2 library"
 
 create_makefile('stormlib/stormlib')

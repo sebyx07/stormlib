@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
   pull_request:
 
 jobs:
@@ -12,21 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     name: Ruby 3.3.4
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.3.4
-        bundler-cache: true
+      - uses: actions/checkout@v4
 
-    - name: Install dependencies
-      run: bundle exec rake install_deps
+      - name: Cache APT packages
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: zlib1g-dev libbz2-dev build-essential
+          version: 1.0
 
-    - name: Compile ext
-      run: bundle exec rake compile
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.4
+          bundler-cache: true
 
-    - name: RSpec
-      run: bundle exec rspec
+      - name: Install dependencies
+        run: bundle exec rake install_deps
 
-    - name: Rubocop
-      run: bundle exec rubocop --parallel
+      - name: Compile ext
+        run: bundle exec rake compile
+
+      - name: RSpec
+        run: bundle exec rspec
+
+      - name: Rubocop
+        run: bundle exec rubocop --parallel
