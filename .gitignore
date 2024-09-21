@@ -11,3 +11,4 @@
 .rspec_status
 lib/stormlib/stormlib.so
 .idea/
+*.gem

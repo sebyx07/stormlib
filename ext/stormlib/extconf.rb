@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'mkmf'
 require 'fileutils'
 
 def log(message)
@@ -13,7 +12,9 @@ STORMLIB_DIR = File.expand_path('../StormLib', __FILE__)
 if File.directory?(STORMLIB_DIR) && File.exist?(File.join(STORMLIB_DIR, 'src', 'StormLib.h'))
   log 'StormLib found!'
 else
-  raise "Cannot find StormLib directory in #{STORMLIB_DIR}"
+  log "Cannot find StormLib directory in #{STORMLIB_DIR}"
+
+  system "git clone https://github.com/ladislav-zezula/StormLib.git #{STORMLIB_DIR}" or raise 'Failed to clone StormLib'
 end
 
 # Compile StormLib
@@ -39,6 +40,8 @@ lib_dir = File.dirname(lib_file)
 lib_name = File.basename(lib_file).sub(/^lib/, '').sub(/\.(a|so)$/, '')
 
 log "Found StormLib: #{lib_file}"
+
+require 'mkmf'
 
 # Set up the extension
 $CFLAGS << " -I#{STORMLIB_DIR}/src -fPIC"
