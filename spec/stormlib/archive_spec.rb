@@ -70,4 +70,16 @@ RSpec.describe StormLib::Archive do
       expect { archive.close }.not_to raise_error
     end
   end
+
+  describe '#list_files' do
+    it 'lists files in the archive' do
+      archive = StormLib::Archive.new(@test_mpq_path)
+      file_list = archive.list_files
+
+      expect(file_list).to be_an(Array)
+      expect(file_list).to include(archived_file_name)
+
+      archive.close
+    end
+  end
 end

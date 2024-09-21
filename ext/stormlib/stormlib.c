@@ -1,5 +1,8 @@
 #include <ruby.h>
+#include <stdbool.h>
+#define bool int
 #include <StormLib.h>
+#undef bool
 
 static VALUE rb_SFileCreateArchive(VALUE self, VALUE filename, VALUE flags, VALUE max_file_count) {
   HANDLE hMpq;
@@ -62,6 +65,24 @@ static VALUE rb_SFileExtractFile(VALUE self, VALUE handle, VALUE archived_name, 
   }
 }
 
+static VALUE rb_SFileListFiles(VALUE self, VALUE handle) {
+  HANDLE hMpq = (HANDLE)NUM2ULONG(handle);
+  SFILE_FIND_DATA findFileData;
+  HANDLE hFind;
+  VALUE fileList = rb_ary_new();
+
+  hFind = SFileFindFirstFile(hMpq, "*", &findFileData, NULL);
+  if (hFind != NULL) {
+    do {
+      rb_ary_push(fileList, rb_str_new_cstr(findFileData.cFileName));
+    } while (SFileFindNextFile(hFind, &findFileData));
+
+    SFileFindClose(hFind);
+  }
+
+  return fileList;
+}
+
 void Init_stormlib() {
   VALUE mStormLib = rb_define_module("StormLib");
 
@@ -70,4 +91,5 @@ void Init_stormlib() {
   rb_define_singleton_method(mStormLib, "close_archive", rb_SFileCloseArchive, 1);
   rb_define_singleton_method(mStormLib, "add_file", rb_SFileAddFileEx, 4);
   rb_define_singleton_method(mStormLib, "extract_file", rb_SFileExtractFile, 3);
+  rb_define_singleton_method(mStormLib, "list_files", rb_SFileListFiles, 1);
 }

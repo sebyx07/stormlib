@@ -24,5 +24,9 @@ module StormLib
     def extract_file(archived_name, filename)
       StormLib.extract_file(@handle, archived_name, filename)
     end
+
+    def list_files
+      StormLib.list_files(@handle)
+    end
   end
 end
