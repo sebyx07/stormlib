@@ -1,8 +1,5 @@
 #include <ruby.h>
-#include <stdbool.h>
-#define bool int
 #include <StormLib.h>
-#undef bool
 
 static VALUE rb_SFileCreateArchive(VALUE self, VALUE filename, VALUE flags, VALUE max_file_count) {
   HANDLE hMpq;

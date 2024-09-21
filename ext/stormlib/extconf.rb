@@ -1,15 +1,9 @@
 # frozen_string_literal: true
 
-# File: ext/stormlib/extconf.rb
-
 require 'mkmf'
 
 puts 'Checking for StormLib...'
 STORMLIB_DIR = File.expand_path('../StormLib', __FILE__)
-unless File.directory?(STORMLIB_DIR)
-  puts 'Cloning StormLib...'
-  system "git clone https://github.com/ladislav-zezula/StormLib.git #{STORMLIB_DIR}"
-end
 
 if File.directory?(STORMLIB_DIR) && File.exist?(File.join(STORMLIB_DIR, 'src', 'StormLib.h'))
   puts 'StormLib found!'
