@@ -10,19 +10,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Ruby ${{ matrix.ruby }}
-    strategy:
-      matrix:
-        ruby:
-          - '3.3.4'
-
+    name: Ruby 3.3.4
     steps:
     - uses: actions/checkout@v4
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby }}
+        ruby-version: 3.3.4
         bundler-cache: true
+
+    - name: Install dependencies
+      run: bundle exec rake install_deps
 
     - name: Compile ext
       run: bundle exec rake compile
