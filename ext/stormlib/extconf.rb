@@ -4,12 +4,14 @@
 
 require 'mkmf'
 
-puts "Checking for StormLib..."
+puts 'Checking for StormLib...'
 STORMLIB_DIR = File.expand_path('../StormLib', __FILE__)
 unless File.directory?(STORMLIB_DIR)
-  puts "Cloning StormLib..."
+  puts 'Cloning StormLib...'
   system "git clone https://github.com/ladislav-zezula/StormLib.git #{STORMLIB_DIR}"
 end
+
+raise "Cannot find StormLib directory in #{STORMLIB_DIR}" unless File.directory?(STORMLIB_DIR)
 
 Dir.chdir(STORMLIB_DIR) do
   # Configure CMake to use -fPIC
