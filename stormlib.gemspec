@@ -21,8 +21,10 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = spec.homepage
 
   gemspec = File.basename(__FILE__)
-  spec.files = Dir.glob('{lib,ext}/**/*') +
-    %w[README.md LICENSE.txt CHANGELOG.md] + [gemspec]
+  spec.files = Dir.glob('{lib,ext}/**/*') + %w[README.md LICENSE.txt CHANGELOG.md] + [gemspec]
+  spec.files = spec.files.reject do |f|
+    f.end_with?('.o', '.so')
+  end
 
   spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }

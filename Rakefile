@@ -11,7 +11,7 @@ STORMLIB_DIR = File.expand_path('ext/stormlib/StormLib', __dir__)
 desc 'Clone or update StormLib'
 task :install_deps do
   puts 'Ensuring StormLib is present...'
-  if File.directory?(STORMLIB_DIR)
+  if File.directory?(STORMLIB_DIR) && File.exist?(File.join(STORMLIB_DIR, 'src', 'StormLib.h'))
     puts 'Updating StormLib...'
     Dir.chdir(STORMLIB_DIR) do
       sh 'git pull'
@@ -27,4 +27,3 @@ Rake::ExtensionTask.new('stormlib') do |ext|
   ext.ext_dir = 'ext/stormlib'
   ext.source_pattern = '*.{c,cpp}'
 end
-
