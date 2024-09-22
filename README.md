@@ -65,6 +65,11 @@ archive.close
 new_archive.close
 ```
 
+## DBC
+
+you can use https://github.com/sebyx07/wow_dbc to CRUD DBC files
+
+
 ## 🧪 Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
