@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stormlib (0.1.0)
+    stormlib (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -102,7 +102,6 @@ PLATFORMS
 
 DEPENDENCIES
   lefthook (~> 1.7, >= 1.7.15)
-  rake (>= 13)
   rake-compiler (>= 1.2.7)
   rspec (~> 3.0)
   rubocop-rails_config (~> 1.16)
