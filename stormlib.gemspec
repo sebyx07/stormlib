@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   gemspec = File.basename(__FILE__)
   spec.files = Dir.glob('{lib,ext}/**/*') + %w[README.md LICENSE.txt CHANGELOG.md] + [gemspec]
   spec.files = spec.files.reject do |f|
-    f.end_with?('.o', '.so') || f.include?('ext/stormlib/StormLib')
+    f.end_with?('.o', '.so', '.a')
   end
 
   spec.bindir = 'exe'

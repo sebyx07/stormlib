@@ -13,8 +13,6 @@ if File.directory?(STORMLIB_DIR) && File.exist?(File.join(STORMLIB_DIR, 'src', '
   log 'StormLib found!'
 else
   log "Cannot find StormLib directory in #{STORMLIB_DIR}"
-
-  system "git clone https://github.com/ladislav-zezula/StormLib.git #{STORMLIB_DIR}" or raise 'Failed to clone StormLib'
 end
 
 # Compile StormLib
